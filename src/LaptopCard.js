@@ -8,6 +8,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import chromebook from './assets/chromebook.jpeg';
+import dell from './assets/dell.jpeg';
+import apple from './assets/macbook.jpeg';
+
 
 const useStyles = makeStyles({
   card: {
@@ -19,12 +23,12 @@ const useStyles = makeStyles({
 });
 
 const laptopImages = {
-  Dell: 'tss-inventory/assets/dell.jpeg', Apple: 'tss-inventory/assets/apple.jpeg', Chromebook: 'tss-inventory/assets/chromebook.jpeg',
+  Dell: dell, Apple: apple, Chromebook: chromebook,
 }
 
 export default function MediaCard(props) {
   const classes = useStyles();
-  
+
   const cardImgUrl = (make) => {
     switch (make) {
       case("Dell"):
@@ -44,22 +48,20 @@ export default function MediaCard(props) {
         <CardActionArea>
             <CardMedia
             className={classes.media}
-            image = {'tss-inventory/assets/dell.jpeg'}
-            title= {props.item.make}
+            component = 'img'
+            alt = 'LaptopImg'
+            
+            image = {cardImgUrl(props.item.make)}
             />
             <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
                 {props.item.make}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                across all continents except Antarctica
-            </Typography>
             </CardContent>
         </CardActionArea>
         <CardActions>
             <Button size="small" color="primary">
-            Share
+            Reserve
             </Button>
             <Button size="small" color="primary">
             Learn More
