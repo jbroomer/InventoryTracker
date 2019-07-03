@@ -8,7 +8,7 @@ const laptopData = [
     {
         id: 1,
         make: 'Dell',
-        status: 'Out'
+        status: 'Available'
     },
     {
         id: 2,
@@ -18,13 +18,33 @@ const laptopData = [
     {
         id: 3,
         make: 'Chromebook',
-        status: 'Out'
+        status: 'Available'
     },
     {
       id: 4,
       make: 'Dell',
       status: 'Out'
-  }
+  },
+  {
+    id: 5,
+    make: 'Apple',
+    status: 'Available'
+},
+{
+    id: 6,
+    make: 'Apple',
+    status: 'Available'
+},
+{
+    id: 7,
+    make: 'Dell',
+    status: 'Available'
+},
+{
+  id: 8,
+  make: 'Chromebook',
+  status: 'Out'
+}
 ];
 
 const useStyles = makeStyles(theme => ({
@@ -53,9 +73,14 @@ export default function CenteredGrid() {
     setCardState();
   }, cards.length);
 
+  const showLaptopHeader = () => {
+    const header = cards.length > 0 ? (<h1>Laptops</h1>) : null;
+    return header;
+  }
+
   return (
     <div className={classes.root}>
-      {/* <button onClick={setCardState}>Load Data</button> */}
+      {showLaptopHeader()}
       <Grid container spacing={3}>
         {cards}
       </Grid>

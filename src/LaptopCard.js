@@ -42,6 +42,11 @@ export default function MediaCard(props) {
     }
   }
 
+  const reserveOrUnavailable = () => {
+    const showStatus = props.item.status === 'Available' ? ("Reserve") : ("Checked-Out");
+    return showStatus;
+  }
+
   return (
     <Grid item xs={3}>
       <Card id = {props.item.id} className={classes.card}>
@@ -61,7 +66,7 @@ export default function MediaCard(props) {
         </CardActionArea>
         <CardActions>
             <Button size="small" color="primary">
-            Reserve
+            {reserveOrUnavailable()}
             </Button>
             <Button size="small" color="primary">
             Learn More
