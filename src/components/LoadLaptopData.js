@@ -152,7 +152,7 @@ export default function CenteredGrid() {
   return (
     <div className={classes.root}>
       <FormControl fullWidth >
-        <InputLabel htmlFor="select-item">Laptop</InputLabel>
+        <InputLabel htmlFor="select-item">Laptops</InputLabel>
         <NativeSelect
           value={filter}
           onChange={handleChange}
