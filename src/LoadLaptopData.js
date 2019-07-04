@@ -3,8 +3,10 @@ import { useState, useEffect } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import Checkbox from '@material-ui/core/Checkbox';
 import InputBase from '@material-ui/core/InputBase';
 
 import LaptopCard from './LaptopCard';
@@ -100,7 +102,8 @@ const useStyles = makeStyles(theme => ({
 export default function CenteredGrid() {
   const classes = useStyles();
   const [cards, setCards] = useState([]);
-  const [filter, setFilter] = useState('none');
+  const [filter, setFilter] = useState('All');
+  const [checkBoxState, setCheckbox] = useState(false);
 
   const setInitialCardState = () => {
     setCards(laptopData.map((x) => {
@@ -109,27 +112,46 @@ export default function CenteredGrid() {
     console.log(cards);
   }
 
-  useEffect(() => {
-    setInitialCardState();
-  }, cards.length);
-
   const handleChange = (e) => {
     setFilter(e.target.value);
-    if(e.target.value === 'All') {
+  }
+  const handleCheckboxFilter = () => {
+    setCheckbox(!checkBoxState);
+  }
+
+  useEffect(() => {
+    if(filter === 'All' && checkBoxState) {
+      setCards(laptopData.map((x) => {
+        return <LaptopCard key = {x.id} item = {x} />
+      }).filter((item) => {
+        return item.props.item.status === 'Available';
+      }));
+    }
+    else if(filter === 'All' && !checkBoxState) {
       setInitialCardState();
+    }
+    else if(checkBoxState){
+      setCards(laptopData.map((x) => {
+        return <LaptopCard key = {x.id} item = {x} />
+      }).filter((item) => {
+        return item.props.item.make === filter && item.props.item.status === 'Available';
+      }));
     }
     else {
       setCards(laptopData.map((x) => {
         return <LaptopCard key = {x.id} item = {x} />
       }).filter((item) => {
-        return item.props.item.make === e.target.value;
+        return item.props.item.make === filter;
       }));
     }
-  }
+    console.log(filter);
+    console.log(checkBoxState);
+  }, [checkBoxState, filter]);
+  
 
   return (
     <div className={classes.root}>
-      <FormControl className={classes.margin}>
+      <FormControl fullWidth >
         <InputLabel htmlFor="select-item">Laptop</InputLabel>
         <NativeSelect
           value={filter}
@@ -141,6 +163,18 @@ export default function CenteredGrid() {
           <option value={'Dell'}>Dell</option>
           <option value={'Chromebook'}>Chromebook</option>
         </NativeSelect>
+        <FormControlLabel
+          control = {
+            <Checkbox
+              checked={checkBoxState}
+              onChange={handleCheckboxFilter}
+              value="checkedA"
+            />
+            
+          }
+          label = 'Only Show Available'
+        >Only Show Available</FormControlLabel>
+        
       </FormControl>
       <Grid container spacing={3}>
         {cards}
