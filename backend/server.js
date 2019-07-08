@@ -2,11 +2,10 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
 const laptopRoutes = express.Router();
 const PORT = 4000;
-let Laptops = require('./laptops.model');
+let Laptop = require('./laptops.model');
 
 
 app.use(cors());
@@ -19,9 +18,26 @@ connection.once('open', function() {
 
 
 
+laptopRoutes.route('/').get(function(req, res) {
+    Laptop.find(function(err, laptops) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(laptops);
+        }
+    });
+});
 
-
-
+laptopRoutes.route('/add').post(function(req, res) {
+    let laptop = new Laptop(req.body);
+    laptop.save()
+        .then(laptop => {
+            res.status(200).json({'laptop': 'laptop added successfully'});
+        })
+        .catch(err => {
+            res.status(400).send('adding new laptop failed');
+        });
+});
 
 
 app.use('/laptops', laptopRoutes);
