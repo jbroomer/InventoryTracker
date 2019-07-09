@@ -60,7 +60,7 @@ export default function MediaCard(props) {
             />
             <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-                {props.item.brand}
+                {props.item.brand} ({props.item.year})
             </Typography>
             </CardContent>
         </CardActionArea>
