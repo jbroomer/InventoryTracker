@@ -29,21 +29,21 @@ const laptopImages = {
 export default function MediaCard(props) {
   const classes = useStyles();
 
-  const cardImgUrl = (make) => {
-    switch (make) {
+  const cardImgUrl = (brand) => {
+    switch (brand) {
       case("Dell"):
         return laptopImages.Dell;
       case("Apple"):
         return laptopImages.Apple;
-      case("Chromebook"):
+      case("Google"):
         return laptopImages.Chromebook;
       default:
-        throw make;
+        throw brand;
     }
   }
 
   const reserveOrUnavailable = () => {
-    const showStatus = props.item.status === 'Available' ? ("Reserve") : ("Checked-Out");
+    const showStatus = props.item.available ? ("Reserve") : ("Checked-Out");
     return showStatus;
   }
 
@@ -56,11 +56,11 @@ export default function MediaCard(props) {
             component = 'img'
             alt = 'LaptopImg'
             
-            image = {cardImgUrl(props.item.make)}
+            image = {cardImgUrl(props.item.brand)}
             />
             <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-                {props.item.make}
+                {props.item.brand}
             </Typography>
             </CardContent>
         </CardActionArea>

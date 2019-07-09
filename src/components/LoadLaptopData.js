@@ -11,49 +11,6 @@ import InputBase from '@material-ui/core/InputBase';
 
 import LaptopCard from './LaptopCard';
 
-const laptopData = [
-    {
-        id: 1,
-        make: 'Dell',
-        status: 'Available'
-    },
-    {
-        id: 2,
-        make: 'Apple',
-        status: 'Out'
-    },
-    {
-        id: 3,
-        make: 'Chromebook',
-        status: 'Available'
-    },
-    {
-      id: 4,
-      make: 'Dell',
-      status: 'Out'
-  },
-  {
-    id: 5,
-    make: 'Apple',
-    status: 'Available'
-},
-{
-    id: 6,
-    make: 'Apple',
-    status: 'Available'
-},
-{
-    id: 7,
-    make: 'Dell',
-    status: 'Available'
-},
-{
-  id: 8,
-  make: 'Chromebook',
-  status: 'Out'
-}
-];
-
 const BootstrapInput = withStyles(theme => ({
   root: {
     'label + &': {
@@ -105,13 +62,48 @@ export default function CenteredGrid() {
   const [filter, setFilter] = useState('All');
   const [checkBoxState, setCheckbox] = useState(false);
 
-  const setInitialCardState = () => {
-    setCards(laptopData.map((x) => {
-      return <LaptopCard key = {x.id} item = {x} />
-    }));
-    console.log(cards);
-  }
+  // Grabs data from server
+  const loadData = () => {
+    return new Promise((resolve, reject) => {
+      fetch('http://localhost:4000/laptops/', {method: "GET"}).then((res, err) => {
+        if(!res.ok) {
+          reject("Failed to load laptops")
+          return err("Failed to Fetch Laptops");
+        }
+        res.json().then(laptops => {
+          //console.log(laptops);
+          return laptops;
+        }).then((data) => {
+          const initialState = data.map((x) => {
+            return <LaptopCard key = {x._id} item = {x} />
+          });
 
+          if(filter === 'All' && checkBoxState) {
+            console.log('1');
+            setCards(initialState.filter((item) => {
+              console.log(item.props.item.available)
+              return item.props.item.available;
+            }));
+            console.log(cards);
+          }
+          else if(filter === 'All' && !checkBoxState) {
+            console.log('2')
+            setCards(initialState);
+          }
+          else if(checkBoxState){
+            setCards((initialState).filter((item) => {
+              return item.props.item.brand === filter && item.props.item.available;
+            }));
+          }
+          else {
+            setCards((initialState).filter((item) => {
+              return item.props.item.brand === filter;
+            }));
+          }
+        })
+      });
+    })
+  }
   const handleChange = (e) => {
     setFilter(e.target.value);
   }
@@ -120,32 +112,7 @@ export default function CenteredGrid() {
   }
 
   useEffect(() => {
-    if(filter === 'All' && checkBoxState) {
-      setCards(laptopData.map((x) => {
-        return <LaptopCard key = {x.id} item = {x} />
-      }).filter((item) => {
-        return item.props.item.status === 'Available';
-      }));
-    }
-    else if(filter === 'All' && !checkBoxState) {
-      setInitialCardState();
-    }
-    else if(checkBoxState){
-      setCards(laptopData.map((x) => {
-        return <LaptopCard key = {x.id} item = {x} />
-      }).filter((item) => {
-        return item.props.item.make === filter && item.props.item.status === 'Available';
-      }));
-    }
-    else {
-      setCards(laptopData.map((x) => {
-        return <LaptopCard key = {x.id} item = {x} />
-      }).filter((item) => {
-        return item.props.item.make === filter;
-      }));
-    }
-    console.log(filter);
-    console.log(checkBoxState);
+    loadData();
   }, [checkBoxState, filter]);
   
 
@@ -161,7 +128,7 @@ export default function CenteredGrid() {
           <option value={'All'}>All</option >
           <option value={'Apple'}>Apple</option>
           <option value={'Dell'}>Dell</option>
-          <option value={'Chromebook'}>Chromebook</option>
+          <option value={'Google'}>Chromebook</option>
         </NativeSelect>
         <FormControlLabel
           control = {
