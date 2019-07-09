@@ -12,6 +12,8 @@ let laptops = new Schema({
     },
     available: {
         type: Boolean
-    }
-});
+    },
+    
+}, {versionKey: false});
+
 module.exports = mongoose.model('laptops', laptops);

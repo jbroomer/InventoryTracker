@@ -28,6 +28,13 @@ laptopRoutes.route('/').get(function(req, res) {
     });
 });
 
+laptopRoutes.route('/:id').get(function(req, res) {
+    let id = req.params.id;
+    Laptop.findById(id, function(err, laptop) {
+        res.json(laptop);
+    });
+});
+
 laptopRoutes.route('/add').post(function(req, res) {
     let laptop = new Laptop(req.body);
     laptop.save()
@@ -39,6 +46,15 @@ laptopRoutes.route('/add').post(function(req, res) {
         });
 });
 
+laptopRoutes.route('/remove/:id').post(function(req, res) {
+    Laptop.deleteOne({ "_id" : req.params.id })
+        .then(laptop => {
+            res.status(200).json({'laptop': 'laptop removed successfully'});
+        })
+        .catch(err => {
+            res.status(400).send('removing laptop failed');
+        });
+});
 
 app.use('/laptops', laptopRoutes);
 app.listen(PORT, function() {
