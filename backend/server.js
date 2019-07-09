@@ -17,7 +17,7 @@ connection.once('open', function() {
 })
 
 
-
+//Retrieve all laptops in laptops collection
 laptopRoutes.route('/').get(function(req, res) {
     Laptop.find(function(err, laptops) {
         if (err) {
@@ -28,6 +28,7 @@ laptopRoutes.route('/').get(function(req, res) {
     });
 });
 
+//Retrieve laptop by id in laptops collection
 laptopRoutes.route('/:id').get(function(req, res) {
     let id = req.params.id;
     Laptop.findById(id, function(err, laptop) {
@@ -35,6 +36,7 @@ laptopRoutes.route('/:id').get(function(req, res) {
     });
 });
 
+//Add laptop with parameters outlined in laptops.models.js
 laptopRoutes.route('/add').post(function(req, res) {
     let laptop = new Laptop(req.body);
     laptop.save()
@@ -46,6 +48,7 @@ laptopRoutes.route('/add').post(function(req, res) {
         });
 });
 
+//Remove laptops by id
 laptopRoutes.route('/remove/:id').post(function(req, res) {
     Laptop.deleteOne({ "_id" : req.params.id })
         .then(laptop => {
