@@ -47,6 +47,10 @@ export default function MediaCard(props) {
     return showStatus;
   }
 
+  const reserveLaptop = () => {
+    
+  }
+
   return (
     <Grid item xs={3}>
       <Card id = {props.item.id} className={classes.card}>
@@ -65,9 +69,8 @@ export default function MediaCard(props) {
             </CardContent>
         </CardActionArea>
         <CardActions>
-            <Button size="small" color="primary">
-            {reserveOrUnavailable()}
-            </Button>
+            {props.showForm}
+
             <Button size="small" color="primary">
             Learn More
             </Button>

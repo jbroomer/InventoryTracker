@@ -59,6 +59,23 @@ laptopRoutes.route('/remove/:id').post(function(req, res) {
         });
 });
 
+
+laptopRoutes.route('/update/:id').post(function(req, res) {
+    Laptop.findById(req.params.id, function(err, laptop) {
+        if (!laptop)
+            res.status(404).send("data is not found");
+        else
+        laptop.name = req.body.name;
+            laptop.save().then(laptop => {
+                res.json('Todo updated!');
+                console.log(laptop.name);
+            })
+            .catch(err => {
+                res.status(400).send("Update not possible");
+            });
+    });
+});
+
 app.use('/laptops', laptopRoutes);
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);

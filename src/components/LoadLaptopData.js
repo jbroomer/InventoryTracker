@@ -8,7 +8,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Checkbox from '@material-ui/core/Checkbox';
 import InputBase from '@material-ui/core/InputBase';
-
+import ReservedLaptop from './ReservedLaptop';
+import CheckedOutLaptop from './CheckedOutLaptop';
 import LaptopCard from './LaptopCard';
 
 const BootstrapInput = withStyles(theme => ({
@@ -71,11 +72,11 @@ export default function CenteredGrid() {
           return err("Failed to Fetch Laptops");
         }
         res.json().then(laptops => {
-          //console.log(laptops);
+          console.log(laptops);
           return laptops;
         }).then((data) => {
           const initialState = data.map((x) => {
-            return <LaptopCard key = {x._id} item = {x} />
+            return <LaptopCard key = {x._id} item = {x} showForm= {x.available?<ReservedLaptop key = {x._id} item = {x}/>:<CheckedOutLaptop key = {x._id} item = {x}/>}/>
           });
 
           if(filter === 'All' && checkBoxState) {

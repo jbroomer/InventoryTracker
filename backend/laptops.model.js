@@ -13,6 +13,9 @@ let laptops = new Schema({
     available: {
         type: Boolean
     },
+    name: {
+        type: String
+    }
     
 }, {versionKey: false});
 
