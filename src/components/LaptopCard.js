@@ -41,11 +41,10 @@ export default function MediaCard(props) {
         throw brand;
     }
   }
-
-  const reserveOrUnavailable = () => {
-    const showStatus = props.item.available ? ("Reserve") : ("Checked-Out");
-    return showStatus;
-  }
+  // const reserveOrUnavailable = () => {
+  //   const showStatus = props.item.available ? ("Reserve") : ("Checked-Out");
+  //   return showStatus;
+  // }
 
   const reserveLaptop = () => {
     
@@ -59,7 +58,6 @@ export default function MediaCard(props) {
             className={classes.media}
             component = 'img'
             alt = 'LaptopImg'
-            
             image = {cardImgUrl(props.item.brand)}
             />
             <CardContent>
@@ -70,7 +68,6 @@ export default function MediaCard(props) {
         </CardActionArea>
         <CardActions>
             {props.showForm}
-
             <Button size="small" color="primary">
             Learn More
             </Button>

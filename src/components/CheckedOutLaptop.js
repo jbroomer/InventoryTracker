@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import CheckedOutLaptopInformation from './CheckedOutLaptopInformation'
+import CheckedOutLaptopInformation from './CheckedOutLaptopInformation';
+import { Dialog, DialogTitle, DialogActions, DialogContent } from '@material-ui/core'
 import axios from 'axios';
 
 
@@ -8,35 +9,55 @@ class CheckedOutLaptop extends Component {
   constructor(props) {
 		super();
 		this.state = {
-			clicked: 'Checked Out'
+			open: false
 		};
-    this.toggleLaptopInformation = this.toggleLaptopInformation.bind(this);
+    //this.toggleLaptopInformation = this.toggleLaptopInformation.bind(this);
     this.returnLaptop = this.returnLaptop.bind(this);
+    this._handleClick = this._handleClick.bind(this);
+    this._handleClose = this._handleClose.bind(this);
+  }
+  
+  _handleClick() {
+    this.setState({ open: true });
+  }
 
-	}
+  _handleClose() {
+    this.setState({ open: false });
+  }
+  // toggleLaptopInformation() {
+  //   this.setState({ clicked:  })
+  // }
 
-toggleLaptopInformation() {
-this.setState({clicked:<CheckedOutLaptopInformation item = {this.props.item} />})
-}
-
-returnLaptop(){
-      axios.post('http://localhost:4000/laptops/return/' + this.props.item._id)
+  returnLaptop(){
+    axios.post('http://localhost:4000/laptops/return/' + this.props.item._id)
     .then(window.location.reload());
-    }
+    console.log("here");
+  }
 
 
-render(){
-return(
-            <div>
-            <Button size="small" color="primary" onClick={this.toggleLaptopInformation}> 
-            {this.state.clicked}
-            </Button>
-            <Button size="small" color="primary" onClick={this.returnLaptop}> 
-            Return Laptop
-            </Button>
-            </div>
-)
-}
+  render(){
+    return(
+      <div>
+        <Dialog fullWidth open = {this.state.open}>
+          <DialogTitle>
+            Checkout Info
+          </DialogTitle>
+          <DialogContent>
+            <CheckedOutLaptopInformation item = {this.props.item} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick = {this._handleClose}>Close</Button>
+          </DialogActions>
+        </Dialog>
+        <Button size="small" color="primary" onClick={this._handleClick}> 
+          Checked Out
+        </Button>
+        <Button size="small" color="primary" onClick={this.returnLaptop}> 
+          Return Laptop
+        </Button>
+      </div>
+    )
+  }
 }
 
 

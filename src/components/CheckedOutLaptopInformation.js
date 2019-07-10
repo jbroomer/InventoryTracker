@@ -1,10 +1,6 @@
 import React from 'react';
 
 export default function CheckedOutLaptopInformation(props) {
-
-  
- 
-
   return (
     <div>
         <p>Staff Member</p>
