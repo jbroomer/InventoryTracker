@@ -6,7 +6,7 @@ class ReserveLaptop extends Component {
   constructor(props) {
 		super();
 		this.state = {
-			clicked: 'Reserved'
+			clicked: 'Reserve'
 		};
 		this.toggleForm = this.toggleForm.bind(this);
 	}

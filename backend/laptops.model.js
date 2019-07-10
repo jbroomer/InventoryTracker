@@ -13,8 +13,11 @@ let laptops = new Schema({
     available: {
         type: Boolean
     },
-    name: {
-        type: String
+    lendInfo: {
+       staffMemberName: {type:String},
+       lendDate: {type: String},
+       expectedReturnDate: {type: String},
+       tssEmployeeName: {type: String}
     }
     
 }, {versionKey: false});

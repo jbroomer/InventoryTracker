@@ -65,16 +65,43 @@ laptopRoutes.route('/update/:id').post(function(req, res) {
         if (!laptop)
             res.status(404).send("data is not found");
         else
-        laptop.name = req.body.name;
+        laptop.lendInfo.staffMemberName = req.body.staffMemberName;
+        laptop.lendInfo.lendDate = req.body.lendDate;
+        laptop.lendInfo.expectedReturnDate = req.body.expectedReturnDate;
+        laptop.lendInfo.tssEmployeeName = req.body.tssEmployeeName;
+        laptop.available = false;
+
             laptop.save().then(laptop => {
-                res.json('Todo updated!');
-                console.log(laptop.name);
+                res.json('Laptop updated!');
+                console.log(laptop.lendInfo.staffMemberName);
+                console.log(laptop.lendInfo.lendDate);
+                console.log(laptop.lendInfo.expectedReturnDate);
+                console.log(laptop.lendInfo.tssEmployeeName);
             })
             .catch(err => {
                 res.status(400).send("Update not possible");
             });
     });
 });
+
+
+laptopRoutes.route('/return/:id').post(function(req, res) {
+    Laptop.findById(req.params.id, function(err, laptop) {
+        if (!laptop)
+            res.status(404).send("data is not found");
+        else
+        laptop.available = true;
+        laptop.lendInfo = null;
+            laptop.save().then(laptop => {
+                res.json('Laptop returned!');
+
+            })
+            .catch(err => {
+                res.status(400).send("Update not possible");
+            });
+    });
+});
+
 
 app.use('/laptops', laptopRoutes);
 app.listen(PORT, function() {
