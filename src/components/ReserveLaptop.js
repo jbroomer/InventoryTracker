@@ -12,16 +12,16 @@ class ReserveLaptop extends Component {
 	}
 
 toggleForm() {
-this.setState({clicked:<ReserveLaptopForm item = {this.props.item} />})
+  this.setState({clicked:<ReserveLaptopForm item = {this.props.item} />})
 }
 
 render(){
 return(
-            <div>
-            <Button size="small" color="primary" onClick={this.toggleForm}> 
-            {this.state.clicked}
-            </Button>
-            </div>
+    <div>
+      <Button size="small" color="primary" onClick={this.toggleForm}> 
+        {this.state.clicked}
+      </Button>
+    </div>
 )
 }
 }

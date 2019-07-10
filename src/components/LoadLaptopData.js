@@ -8,7 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Checkbox from '@material-ui/core/Checkbox';
 import InputBase from '@material-ui/core/InputBase';
-import ReservedLaptop from './ReservedLaptop';
+import ReserveLaptop from './ReserveLaptop';
 import CheckedOutLaptop from './CheckedOutLaptop';
 import LaptopCard from './LaptopCard';
 
@@ -76,7 +76,8 @@ export default function CenteredGrid() {
           return laptops;
         }).then((data) => {
           const initialState = data.map((x) => {
-            return <LaptopCard key = {x._id} item = {x} showForm= {x.available?<ReservedLaptop key = {x._id} item = {x}/>:<CheckedOutLaptop key = {x._id} item = {x}/>}/>
+            //Uses availability of laptop to show a ReservedLaptop Component or a CheckedOutLaptopComponent
+            return <LaptopCard key = {x._id} item = {x} showForm= {x.available?<ReserveLaptop key = {x._id} item = {x}/>:<CheckedOutLaptop key = {x._id} item = {x}/>}/>
           });
 
           if(filter === 'All' && checkBoxState) {

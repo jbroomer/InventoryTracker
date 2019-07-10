@@ -70,7 +70,6 @@ export default function MediaCard(props) {
         </CardActionArea>
         <CardActions>
             {props.showForm}
-
             <Button size="small" color="primary">
             Learn More
             </Button>

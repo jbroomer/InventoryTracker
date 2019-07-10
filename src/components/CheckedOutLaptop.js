@@ -12,29 +12,28 @@ class CheckedOutLaptop extends Component {
 		};
     this.toggleLaptopInformation = this.toggleLaptopInformation.bind(this);
     this.returnLaptop = this.returnLaptop.bind(this);
-
 	}
 
 toggleLaptopInformation() {
-this.setState({clicked:<CheckedOutLaptopInformation item = {this.props.item} />})
+    this.setState({clicked:<CheckedOutLaptopInformation item = {this.props.item} />})
 }
 
 returnLaptop(){
       axios.post('http://localhost:4000/laptops/return/' + this.props.item._id)
-    .then(window.location.reload());
+        .then(window.location.reload());
     }
 
 
 render(){
 return(
-            <div>
-            <Button size="small" color="primary" onClick={this.toggleLaptopInformation}> 
-            {this.state.clicked}
-            </Button>
-            <Button size="small" color="primary" onClick={this.returnLaptop}> 
-            Return Laptop
-            </Button>
-            </div>
+  <div>
+    <Button size="small" color="primary" onClick={this.toggleLaptopInformation}> 
+      {this.state.clicked}
+    </Button>
+    <Button size="small" color="primary" onClick={this.returnLaptop}> 
+      Return Laptop
+    </Button>
+  </div>
 )
 }
 }

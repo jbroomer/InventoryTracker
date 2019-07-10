@@ -17,8 +17,8 @@ export default function ReserveLaptopForm(props) {
         reservationInfo.expectedReturnDate = form.expectedReturn.value
         reservationInfo.tssEmployeeName = form.tssEmployeeName.value
 
-    axios.post('http://localhost:4000/laptops/update/' +props.item._id, reservationInfo)
-    .then(res => console.log(res.data));
+        axios.post('http://localhost:4000/laptops/update/' +props.item._id, reservationInfo)
+            .then(res => console.log(res.data));
     }
     
 
