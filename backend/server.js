@@ -17,7 +17,7 @@ connection.once('open', function() {
 })
 
 
-//Retrieve all laptops in laptops collection
+//Retrieve all laptops in laptops collection. Used in LoadLaptop.js.
 laptopRoutes.route('/').get(function(req, res) {
     Laptop.find(function(err, laptops) {
         if (err) {
@@ -28,7 +28,7 @@ laptopRoutes.route('/').get(function(req, res) {
     });
 });
 
-//Retrieve laptop by id in laptops collection
+//Retrieve laptop by id in laptops collection.
 laptopRoutes.route('/:id').get(function(req, res) {
     let id = req.params.id;
     Laptop.findById(id, function(err, laptop) {
@@ -36,7 +36,7 @@ laptopRoutes.route('/:id').get(function(req, res) {
     });
 });
 
-//Add laptop with parameters outlined in laptops.models.js
+//Add laptop with parameters outlined in laptops.models.js.
 laptopRoutes.route('/add').post(function(req, res) {
     let laptop = new Laptop(req.body);
     laptop.save()
@@ -59,7 +59,7 @@ laptopRoutes.route('/remove/:id').post(function(req, res) {
         });
 });
 
-
+//Update laptop by id,used when someone reserves a laptop. Used in ReserveLaptopForm.js.
 laptopRoutes.route('/update/:id').post(function(req, res) {
     Laptop.findById(req.params.id, function(err, laptop) {
         if (!laptop)
@@ -84,7 +84,7 @@ laptopRoutes.route('/update/:id').post(function(req, res) {
     });
 });
 
-
+//Updates laptop by id, used when someone returns a checked out laptop. Used in CheckedOutLaptop.js.
 laptopRoutes.route('/return/:id').post(function(req, res) {
     Laptop.findById(req.params.id, function(err, laptop) {
         if (!laptop)
