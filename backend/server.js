@@ -17,7 +17,7 @@ connection.once('open', function() {
 })
 
 
-//Retrieve all laptops in laptops collection
+//Retrieve all laptops in laptops collection. Used in LoadLaptop.js.
 laptopRoutes.route('/').get(function(req, res) {
     Laptop.find(function(err, laptops) {
         if (err) {
@@ -28,7 +28,7 @@ laptopRoutes.route('/').get(function(req, res) {
     });
 });
 
-//Retrieve laptop by id in laptops collection
+//Retrieve laptop by id in laptops collection.
 laptopRoutes.route('/:id').get(function(req, res) {
     let id = req.params.id;
     Laptop.findById(id, function(err, laptop) {
@@ -36,7 +36,7 @@ laptopRoutes.route('/:id').get(function(req, res) {
     });
 });
 
-//Add laptop with parameters outlined in laptops.models.js
+//Add laptop with parameters outlined in laptops.models.js.
 laptopRoutes.route('/add').post(function(req, res) {
     let laptop = new Laptop(req.body);
     laptop.save()
@@ -58,6 +58,50 @@ laptopRoutes.route('/remove/:id').post(function(req, res) {
             res.status(400).send('removing laptop failed');
         });
 });
+
+//Update laptop by id,used when someone reserves a laptop. Used in ReserveLaptopForm.js.
+laptopRoutes.route('/update/:id').post(function(req, res) {
+    Laptop.findById(req.params.id, function(err, laptop) {
+        if (!laptop)
+            res.status(404).send("data is not found");
+        else
+        laptop.lendInfo.staffMemberName = req.body.staffMemberName;
+        laptop.lendInfo.lendDate = req.body.lendDate;
+        laptop.lendInfo.expectedReturnDate = req.body.expectedReturnDate;
+        laptop.lendInfo.tssEmployeeName = req.body.tssEmployeeName;
+        laptop.available = false;
+
+            laptop.save().then(laptop => {
+                res.json('Laptop updated!');
+                console.log(laptop.lendInfo.staffMemberName);
+                console.log(laptop.lendInfo.lendDate);
+                console.log(laptop.lendInfo.expectedReturnDate);
+                console.log(laptop.lendInfo.tssEmployeeName);
+            })
+            .catch(err => {
+                res.status(400).send("Update not possible");
+            });
+    });
+});
+
+//Updates laptop by id, used when someone returns a checked out laptop. Used in CheckedOutLaptop.js.
+laptopRoutes.route('/return/:id').post(function(req, res) {
+    Laptop.findById(req.params.id, function(err, laptop) {
+        if (!laptop)
+            res.status(404).send("data is not found");
+        else
+        laptop.available = true;
+        laptop.lendInfo = null;
+            laptop.save().then(laptop => {
+                res.json('Laptop returned!');
+
+            })
+            .catch(err => {
+                res.status(400).send("Update not possible");
+            });
+    });
+});
+
 
 app.use('/laptops', laptopRoutes);
 app.listen(PORT, function() {
