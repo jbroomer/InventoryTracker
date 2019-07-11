@@ -53,7 +53,7 @@ class CheckedOutLaptop extends Component {
             </Button>
           </DialogActions>
         </Dialog>
-        <Button size="small" color="primary" onClick={this._handleClick}> 
+        <Button size="small" color = "secondary" onClick={this._handleClick}> 
           Checked Out
         </Button>
       </div>

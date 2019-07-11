@@ -32,10 +32,7 @@ class ReserveLaptop extends Component {
     return (
       <div>
         <Dialog fullWidth open = {this.state.open} onBackdropClick = {this._handleCancel}>
-          <DialogTitle>Lending Info</DialogTitle>
-          <DialogContent>
-            <ReserveLaptopForm item = {this.props.item} onClose = {this._handleClose}/>
-          </DialogContent>
+          <ReserveLaptopForm item = {this.props.item} onClose = {this._handleClose} onCancel = {this._handleCancel} />
         </Dialog>
         <Button size="small" color="primary" onClick={this._handleOpen}> 
           Reserve

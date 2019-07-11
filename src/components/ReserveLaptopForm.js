@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState } from 'react'
-import { Button, TextField,  } from '@material-ui/core';
+import { Button, TextField, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
@@ -45,7 +45,9 @@ export default function ReserveLaptopForm(props) {
 
   return (
     <div>
-      <form name = "laptopForm">
+      <DialogTitle>Lending Info</DialogTitle>
+        <DialogContent>
+          <form name = "laptopForm">
           <TextField
             id="outlined-simple-start-adornment"
             style={{ marginRight: '10px' }}
@@ -89,14 +91,24 @@ export default function ReserveLaptopForm(props) {
                 }}
               />
             </MuiPickersUtilsProvider>         
-            <Button 
-              style = {{ marginTop: '30px', marginLeft: '10px'}}
+          </form>
+        </DialogContent>
+        <DialogActions>
+          <Button 
               variant = 'contained'
               color = 'primary'
-              onClick = {onSubmit}>
+              onClick = {onSubmit}
+          >
                 Submit
-            </Button>
-      </form>
+          </Button>
+          <Button
+            variant = 'contained'
+            color = 'primary'
+            onClick = {props.onCancel}
+          >
+            Cancel
+          </Button>
+        </DialogActions>
     </div>
   );
 }
