@@ -12,6 +12,7 @@ import ReservedLaptop from './ReservedLaptop';
 import CheckedOutLaptop from './CheckedOutLaptop';
 import LaptopCard from './LaptopCard';
 
+
 const BootstrapInput = withStyles(theme => ({
   root: {
     'label + &': {
@@ -117,6 +118,7 @@ export default function CenteredGrid() {
     setCheckbox(!checkBoxState);
   }
 
+
   useEffect(() => {
     loadData();
   }, [checkBoxState, filter]);
@@ -150,7 +152,7 @@ export default function CenteredGrid() {
         
       </FormControl>
       <Grid container spacing={3}>
-        {cards}
+        {cards}  
       </Grid>
     </div>
   );

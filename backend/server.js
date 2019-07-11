@@ -39,6 +39,7 @@ laptopRoutes.route('/:id').get(function(req, res) {
 //Add laptop with parameters outlined in laptops.models.js.
 laptopRoutes.route('/add').post(function(req, res) {
     let laptop = new Laptop(req.body);
+    laptop.lendInfo = null;
     laptop.save()
         .then(laptop => {
             res.status(200).json({'laptop': 'laptop added successfully'});
