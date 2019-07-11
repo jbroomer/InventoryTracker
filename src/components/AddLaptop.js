@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import CheckedOutLaptopInformation from './CheckedOutLaptopInformation';
 import { Dialog, DialogTitle, DialogActions, DialogContent } from '@material-ui/core'
 import axios from 'axios';
+import AddLaptopForm from './AddLaptopForm'
 
-
-class CheckedOutLaptop extends Component {
+class AddLaptop extends Component {
   constructor(props) {
 		super();
 		this.state = {
 			open: false
 		};
     //this.toggleLaptopInformation = this.toggleLaptopInformation.bind(this);
-    this.returnLaptop = this.returnLaptop.bind(this);
+    this.addLaptop = this.addLaptop.bind(this);
     this._handleClick = this._handleClick.bind(this);
     this._handleClose = this._handleClose.bind(this);
   }
-
-
+  
   _handleClick() {
     this.setState({ open: true });
   }
@@ -29,7 +27,7 @@ class CheckedOutLaptop extends Component {
   //   this.setState({ clicked:  })
   // }
 
-  returnLaptop(){
+  addLaptop(){
     axios.post('http://localhost:4000/laptops/return/' + this.props.item._id)
     .then(window.location.reload());
     console.log("here");
@@ -41,21 +39,19 @@ class CheckedOutLaptop extends Component {
       <div>
         <Dialog fullWidth open = {this.state.open}>
           <DialogTitle>
-            Checkout Info
+            Add Laptop
           </DialogTitle>
           <DialogContent>
-            <CheckedOutLaptopInformation item = {this.props.item} />
+            <AddLaptopForm/>
           </DialogContent>
           <DialogActions>
-            <Button color="primary" onClick = {this._handleClose}>Close</Button>
-            <Button size="small" color="secondary" onClick={this.returnLaptop}>
-              Return Laptop
-            </Button>
+            <Button onClick = {this._handleClose}>Close</Button>
           </DialogActions>
         </Dialog>
-        <Button size="small" color="primary" onClick={this._handleClick}>
-          Checked Out
+        <Button size="small" color="primary" onClick={this._handleClick}> 
+          Add Laptop
         </Button>
+
       </div>
     )
   }
@@ -63,4 +59,4 @@ class CheckedOutLaptop extends Component {
 
 
 
-export default CheckedOutLaptop;
+export default AddLaptop;

@@ -12,6 +12,7 @@ import ReserveLaptop from './ReserveLaptop';
 import CheckedOutLaptop from './CheckedOutLaptop';
 import LaptopCard from './LaptopCard';
 
+
 const BootstrapInput = withStyles(theme => ({
   root: {
     'label + &': {
@@ -76,8 +77,12 @@ export default function CenteredGrid() {
           return laptops;
         }).then((data) => {
           const initialState = data.map((x) => {
-            //Uses availability of laptop to show a ReservedLaptop Component or a CheckedOutLaptopComponent
-            return <LaptopCard key = {x._id} item = {x} showForm= {x.available?<ReserveLaptop key = {x._id} item = {x}/>:<CheckedOutLaptop key = {x._id} item = {x}/>}/>
+            return <LaptopCard
+            key = {x._id}
+            item = {x}
+            showForm = {x.available ? (<ReserveLaptop key = {x._id} item = {x}/>)
+                        : <CheckedOutLaptop key = {x._id} item = {x}/>}
+                    />
           });
 
           if(filter === 'All' && checkBoxState) {
@@ -113,10 +118,11 @@ export default function CenteredGrid() {
     setCheckbox(!checkBoxState);
   }
 
+
   useEffect(() => {
     loadData();
   }, [checkBoxState, filter]);
-  
+
 
   return (
     <div className={classes.root}>
@@ -139,11 +145,11 @@ export default function CenteredGrid() {
               onChange={handleCheckboxFilter}
               value="checkedA"
             />
-            
+
           }
           label = 'Only Show Available'
         >Only Show Available</FormControlLabel>
-        
+
       </FormControl>
       <Grid container spacing={3}>
         {cards}
