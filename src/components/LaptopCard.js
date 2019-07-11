@@ -41,14 +41,6 @@ export default function MediaCard(props) {
         throw brand;
     }
   }
-  // const reserveOrUnavailable = () => {
-  //   const showStatus = props.item.available ? ("Reserve") : ("Checked-Out");
-  //   return showStatus;
-  // }
-
-  const reserveLaptop = () => {
-    
-  }
 
   return (
     <Grid item xs={3}>

@@ -25,10 +25,10 @@ class ReserveLaptop extends Component {
   render() {
     return (
       <div>
-        <Dialog open = {this.state.open}>
+        <Dialog fullWidth open = {this.state.open}>
           <DialogTitle>Lending Info</DialogTitle>
           <DialogContent>
-            <ReserveLaptopForm item = {this.props.item} onClose = {this.onClose}/>
+            <ReserveLaptopForm item = {this.props.item} onClose = {this._handleCloseClose}/>
           </DialogContent>
         </Dialog>
         <Button size="small" color="primary" onClick={this._handleOpen}> 

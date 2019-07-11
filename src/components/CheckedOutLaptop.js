@@ -16,7 +16,8 @@ class CheckedOutLaptop extends Component {
     this._handleClick = this._handleClick.bind(this);
     this._handleClose = this._handleClose.bind(this);
   }
-  
+
+
   _handleClick() {
     this.setState({ open: true });
   }
@@ -46,14 +47,14 @@ class CheckedOutLaptop extends Component {
             <CheckedOutLaptopInformation item = {this.props.item} />
           </DialogContent>
           <DialogActions>
-            <Button onClick = {this._handleClose}>Close</Button>
+            <Button color="primary" onClick = {this._handleClose}>Close</Button>
+            <Button size="small" color="secondary" onClick={this.returnLaptop}> 
+              Return Laptop
+            </Button>
           </DialogActions>
         </Dialog>
         <Button size="small" color="primary" onClick={this._handleClick}> 
           Checked Out
-        </Button>
-        <Button size="small" color="primary" onClick={this.returnLaptop}> 
-          Return Laptop
         </Button>
       </div>
     )
