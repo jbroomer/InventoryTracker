@@ -10,7 +10,8 @@ class ReserveLaptop extends Component {
 			open: false,
     };
     this._handleOpen = this._handleOpen.bind(this);
-		this._handleClose = this._handleClose.bind(this);
+    this._handleClose = this._handleClose.bind(this);
+    this._handleCancel = this._handleCancel.bind(this);
 	}
 
   _handleOpen() {
@@ -22,11 +23,15 @@ class ReserveLaptop extends Component {
     window.location.reload();
   }
 
+  _handleCancel() {
+    this.setState({ open: false})
+  }
+
   
   render() {
     return (
       <div>
-        <Dialog fullWidth open = {this.state.open}>
+        <Dialog fullWidth open = {this.state.open} onBackdropClick = {this._handleCancel}>
           <DialogTitle>Lending Info</DialogTitle>
           <DialogContent>
             <ReserveLaptopForm item = {this.props.item} onClose = {this._handleClose}/>
