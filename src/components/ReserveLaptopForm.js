@@ -26,7 +26,7 @@ export default function ReserveLaptopForm(props) {
         reservationInfo.tssEmployeeName = form.tssEmployeeName.value
 
         axios.post('http://localhost:4000/laptops/update/' + props.item._id, reservationInfo)
-        .then(res => console.log(res.data));
+        .then(res => props.onClose());
     }
 
     const _handleLendDateChange = (date) => {
@@ -40,7 +40,7 @@ export default function ReserveLaptopForm(props) {
     
     const onSubmit = () => {
       reserveLaptop();
-      props.onClose();
+      //props.onClose();
     } 
 
   return (

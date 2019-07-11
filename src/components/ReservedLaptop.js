@@ -19,6 +19,7 @@ class ReserveLaptop extends Component {
 
   _handleClose() {
     this.setState({ open: false})
+    window.location.reload();
   }
 
   
@@ -28,7 +29,7 @@ class ReserveLaptop extends Component {
         <Dialog fullWidth open = {this.state.open}>
           <DialogTitle>Lending Info</DialogTitle>
           <DialogContent>
-            <ReserveLaptopForm item = {this.props.item} onClose = {this._handleCloseClose}/>
+            <ReserveLaptopForm item = {this.props.item} onClose = {this._handleClose}/>
           </DialogContent>
         </Dialog>
         <Button size="small" color="primary" onClick={this._handleOpen}> 
