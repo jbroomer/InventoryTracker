@@ -15,6 +15,7 @@ export default function AddLaptopForm(props) {
         laptopInfo.brand = form.brand.value;
         laptopInfo.model = form.model.value
         laptopInfo.year = form.year.value
+        laptopInfo.available = true
 
         axios.post('http://localhost:4000/laptops/add' , laptopInfo)
         .then(res => console.log(res.data));

@@ -10,7 +10,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import LoadLaptopData from './components/LoadLaptopData';
+import LoadEquipmentData from './components/LoadEquipmentData';
 import AddLaptop from './components/AddLaptop';
+import AddEquipment from './components/AddEquipment';
+
 //import Dashboard from './components/Dashboard';
 
 
@@ -60,10 +63,13 @@ function NavBar(props) {
             <Link style = {{ textDecoration: 'none', color: 'white' }} to = '/checkoutLaptops'>Checkout Laptops</Link>
             </Typography>
             <Typography className = {classes.navbar}>
-            <Link style = {{ textDecoration: 'none', marginLeft: '10px', color: 'white'}} to = '/checkoutOther'>Checkout Other</Link>
+            <Link style = {{ textDecoration: 'none', marginLeft: '10px', color: 'white'}} to = '/checkoutEquipment'>Checkout Equipment</Link>
             </Typography>
             <Typography className = {classes.navbar}>
             <Link style = {{ textDecoration: 'none', marginLeft: '10px', color: 'white'}} to = '/addLaptops'>Add Laptops</Link>
+            </Typography>
+            <Typography className = {classes.navbar}>
+            <Link style = {{ textDecoration: 'none', marginLeft: '10px', color: 'white'}} to = '/addEquipment'>Add Equipment</Link>
             </Typography>
         </Toolbar>
       </AppBar>
@@ -92,8 +98,9 @@ const RoutedApp = () => (
     <Route path="/" component={NavBar} />
     <Redirect exact from="/" to="/checkoutLaptops" />
     <Route path = "/checkoutLaptops" component = {LoadLaptopData} />
-    <Route path="/checkoutOther" component={NoMatch} />
+    <Route path="/checkoutEquipment" component={LoadEquipmentData} />
     <Route path = "/addLaptops" component = {AddLaptop} />
+    <Route path = "/addEquipment" component = {AddEquipment} />
   </BrowserRouter>
   );
 
