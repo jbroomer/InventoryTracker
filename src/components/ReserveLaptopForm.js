@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState } from 'react'
-import { Button, TextField, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
+import { Button, TextField, DialogActions, DialogContent, DialogTitle} from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
@@ -9,38 +9,63 @@ import {
 } from '@material-ui/pickers';
 
 export default function ReserveLaptopForm(props) {
-  const [lendDate, setLendDate] = useState();
-  const [returnDate, setReturnDate] = useState();
+  const [lendDate, setLendDate] = useState(new Date());
+  const [returnDate, setReturnDate] = useState(new Date());
+  const [staffEmptyError, setStaffEmptyError] = useState(false);
+  const [tssEmptyError, setTssEmptyError] = useState(false);
   let reservationInfo = {
       staffMemberName: '',
       lendDate: null,
       expectedReturnDate: '',
-      tssEmployeeName: ''
+      tssEmployeeName: '',
   }
     const reserveLaptop = () => {
         let form = document.forms.laptopForm;
-
         reservationInfo.staffMemberName = form.staffMemberName.value;
-        reservationInfo.lendDate = form.lendDate.value
-        reservationInfo.expectedReturnDate = form.expectedReturn.value
-        reservationInfo.tssEmployeeName = form.tssEmployeeName.value
+        reservationInfo.tssEmployeeName = form.tssEmployeeName.value;
 
-        axios.post('http://localhost:4000/laptops/update/' + props.item._id, reservationInfo)
-        .then(res => props.onClose());
+        reservationInfo.lendDate = form.lendDate.value + `, ${lendDate.getYear() + 1900}`;
+        reservationInfo.expectedReturnDate = form.expectedReturn.value + `, ${returnDate.getYear() + 1900}`;
+
+        const staffError = reservationInfo.staffMemberName.length >= 1 ? false : true;
+        const tssError = reservationInfo.tssEmployeeName.length >= 1 ? false : true;
+        console.log(staffError);
+        console.log(tssError);
+        setStaffEmptyError(staffError);
+        setTssEmptyError(tssError);
+        
+        if(!staffError && !tssError) {
+          axios.post('http://localhost:4000/laptops/update/' + props.item._id, reservationInfo)
+          .then(res => props.onClose());
+        }
     }
 
     const _handleLendDateChange = (date) => {
-      console.log(date);
-      setLendDate(date);
-      console.log(new Date(reservationInfo.lendDate));
+      if(date.getYear() <= returnDate.getYear()
+        && date.getMonth() <= returnDate.getMonth()
+        && date.getDate() <= returnDate.getDate()
+      ){
+        setLendDate(date);
+      }
+      else{
+        window.alert('The lend date cannot be later than the return date');
+      }
+
     }
     const _handleReturnDateChange = (date) => {
-      setReturnDate(date);
+      if(date.getYear() >= lendDate.getYear()
+        && date.getMonth() >= lendDate.getMonth()
+        && date.getDate() >= lendDate.getDate()
+      ){
+        setReturnDate(date);
+      }
+      else{
+        window.alert('The return date cannot be earlier than the lend date');
+      }
     }
 
     const onSubmit = () => {
       reserveLaptop();
-      //props.onClose();
     }
 
   return (
@@ -49,6 +74,8 @@ export default function ReserveLaptopForm(props) {
         <DialogContent>
           <form name = "laptopForm">
           <TextField
+            required
+            error = {staffEmptyError}
             id="outlined-simple-start-adornment"
             style={{ marginRight: '10px' }}
             variant="outlined"
@@ -56,8 +83,9 @@ export default function ReserveLaptopForm(props) {
             name = "staffMemberName"
           />
           <TextField
+            required
             id="outlined-simple-start-adornment"
-            //className={clsx(classes.margin, classes.textField)}
+            error = {tssEmptyError}
             variant="outlined"
             label="Employee Name"
             name = "tssEmployeeName"
