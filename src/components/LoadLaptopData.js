@@ -126,7 +126,7 @@ export default function CenteredGrid() {
 
   return (
     <div className={classes.root}>
-      <FormControl fullWidth >
+      <FormControl fullWidth>
         <InputLabel htmlFor="select-item">Laptops</InputLabel>
         <NativeSelect
           value={filter}
@@ -148,8 +148,9 @@ export default function CenteredGrid() {
 
           }
           label = 'Only Show Available'
-        >Only Show Available</FormControlLabel>
-
+        >
+          Only Show Available
+        </FormControlLabel>
       </FormControl>
       <Grid container spacing={3}>
         {cards}
