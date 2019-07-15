@@ -32,7 +32,12 @@ class ReserveEquipment extends Component {
     return (
       <div>
         <Dialog fullWidth open = {this.state.open} onBackdropClick = {this._handleCancel}>
-          <ReserveEquipmentForm item = {this.props.item} onClose = {this._handleClose} onCancel = {this._handleCancel} />
+          <ReserveEquipmentForm 
+          item = {this.props.item}
+          onClose = {this._handleClose}
+          onCancel = {this._handleCancel}
+          query = 'equipment'
+          />
         </Dialog>
         <Button size="small" color="primary" onClick={this._handleOpen}> 
           Reserve

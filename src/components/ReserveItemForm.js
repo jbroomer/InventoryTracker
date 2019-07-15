@@ -33,7 +33,7 @@ export default function ReserveLaptopForm(props) {
         setTssEmptyError(tssError);
         
         if(!staffError && !tssError) {
-          axios.post('http://localhost:4000/laptops/update/' + props.item._id, reservationInfo)
+          axios.post(`http://localhost:4000/${props.query}/update/` + props.item._id, reservationInfo)
           .then(res => props.onClose());
         }
     }

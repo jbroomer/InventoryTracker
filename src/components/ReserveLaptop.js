@@ -36,6 +36,7 @@ class ReserveLaptop extends Component {
             item = {this.props.item}
             onClose = {this._handleClose}
             onCancel = {this._handleCancel}
+            query = 'laptops'
             />
         </Dialog>
         <Button size="small" color="primary" onClick={this._handleOpen}>
