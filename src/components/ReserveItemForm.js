@@ -29,8 +29,6 @@ export default function ReserveLaptopForm(props) {
 
         const staffError = reservationInfo.staffMemberName.length >= 1 ? false : true;
         const tssError = reservationInfo.tssEmployeeName.length >= 1 ? false : true;
-        console.log(staffError);
-        console.log(tssError);
         setStaffEmptyError(staffError);
         setTssEmptyError(tssError);
         

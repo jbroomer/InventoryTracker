@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
 import { Dialog} from '@material-ui/core';
-import ReserveLaptopForm from './ReserveLaptopForm'
+import ReserveLaptopForm from './ReserveItemForm'
 
 class ReserveLaptop extends Component {
   constructor(props) {
