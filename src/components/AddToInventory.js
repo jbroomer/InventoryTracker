@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   Dialog,
   DialogContent,
@@ -6,13 +6,10 @@ import {
   DialogActions,
   Select,
   Divider,
-  OutlinedInput,
   MenuItem,
-  InputLabel,
   FormControl,
   Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles'; 
-import axios from 'axios';
+import { makeStyles } from '@material-ui/core/styles';
 import AddLaptopForm from './AddLaptopForm';
 import AddEquipmentForm from './AddEquipmentForm';
 
@@ -23,11 +20,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
-  title: {
-      color: 'white',
-  },
 }));
-
 
 const AddLaptop = (props) => {
   const classes = useStyles();
@@ -43,7 +36,7 @@ const AddLaptop = (props) => {
     else {
       setAddEquipment(true);
     }
-    setOpen(false);
+    handleClose();
   }
   const handleChange = (e) => {
     setItemToAdd(e.target.value);
@@ -51,7 +44,7 @@ const AddLaptop = (props) => {
   const handleClose = () => {
     setOpen(false);
   }
-  const handleOnClick = () => {
+  const handleOnOpen = () => {
     setOpen(true);
   }
 
@@ -61,55 +54,52 @@ const AddLaptop = (props) => {
     }
     return <AddEquipmentForm addEquipment={addEquipment} />;
   }
-
-    return(
-      <div>
-        <Button 
-          style={{color:'white'}}
-          onClick={handleOnClick}
-        >
-          Add
-        </Button>
-        <Dialog open={open} onBackdropClick={handleClose}>
-          <DialogTitle style={{textAlign:'center'}}>
-            Add to Inventory
-          </DialogTitle>
-          <Divider />
-          <DialogContent>
-           <FormControl>
-            <Select
-              className={classes.root}
-              value={itemToAdd}
-              onChange={handleChange}
-              //input={<OutlinedInput name="addItem" id="add-item" />}
-            >
-              <MenuItem value={'laptop'}>Add Laptop</MenuItem>
-              <MenuItem value={'other'}>Add Other</MenuItem>
-            </Select>
-            {renderForm()}
-          </FormControl>
-          </DialogContent>
-          <DialogActions>
-            <Button 
-              variant="contained"
-              color="secondary"
-              onClick={handleClose}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleAddItem}
-            >
-              Add
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    )
+  
+  return(
+    <div>
+      <Button 
+        style={{color:'white'}}
+        onClick={handleOnOpen}
+      >
+        Add
+      </Button>
+      <Dialog open={open} onBackdropClick={handleClose}>
+        <DialogTitle style={{textAlign:'center'}}>
+          Add to Inventory
+        </DialogTitle>
+        <Divider />
+        <DialogContent>
+          <FormControl>
+          <Select
+            className={classes.root}
+            value={itemToAdd}
+            onChange={handleChange}
+            //input={<OutlinedInput name="addItem" id="add-item" />}
+          >
+            <MenuItem value={'laptop'}>Add Laptop</MenuItem>
+            <MenuItem value={'other'}>Add Other</MenuItem>
+          </Select>
+          {renderForm()}
+        </FormControl>
+        </DialogContent>
+        <DialogActions>
+          <Button 
+            variant="contained"
+            color="secondary"
+            onClick={handleClose}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleAddItem}
+          >
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  )
 };
-
-
-
 export default AddLaptop;

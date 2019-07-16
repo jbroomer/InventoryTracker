@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import  { Redirect, Route, Link, BrowserRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, IconButton, Icon, Button } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -67,21 +67,6 @@ function NavBar(props) {
   );
 }
 
-// const TestApp = (props) => (
-//   <div>
-//     <Navbar buttonLink = { <Link to = '/checkout'>Checkout</Link>}/>
-//     <div className="contents">
-//       {props.children}
-//     </div>
-//   </div >
-// );
-
-// For safety, we specify that the prop types received by the
-// App component must require a "children" property. If we do
-// not include this it will not compile.
-// TestApp.propTypes = {
-//   children: React.PropTypes.object.isRequired,
-// };
 const RoutedApp = () => (  
   
   <BrowserRouter>

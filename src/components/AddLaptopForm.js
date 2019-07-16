@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FormControl, FormLabel, Select, OutlinedInput, MenuItem, TextField, InputLabel} from '@material-ui/core';
+import { FormControl, Select, OutlinedInput, MenuItem, InputLabel} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import LaptopModels from '../static/laptop-models';
 
@@ -26,15 +26,16 @@ export default function AddLaptopForm(props) {
   const [year, setYear] = useState('');
   
   const addLaptop = () => {
-      console.log("In laptop form")
       const laptopInfo = {};
-      laptopInfo.brand = brand;
-      laptopInfo.model = model;
-      laptopInfo.year = year;
-      laptopInfo.available = true
-      console.log(laptopInfo);
-      axios.post('http://localhost:4000/laptops/add' , laptopInfo)
-      .then(res => window.location.reload());
+      if(brand && model && year) {
+        laptopInfo.brand = brand;
+        laptopInfo.model = model;
+        laptopInfo.year = year;
+        laptopInfo.available = true
+        
+        axios.post('http://localhost:4000/laptops/add' , laptopInfo)
+        .then(res => window.location.reload());
+      }
   }
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
