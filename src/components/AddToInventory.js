@@ -77,16 +77,15 @@ const AddLaptop = (props) => {
           <Divider />
           <DialogContent>
            <FormControl>
-          <Select
-            className={classes.root}
-            value={itemToAdd}
-            onChange={handleChange}
-            //input={<OutlinedInput name="addItem" id="add-item" />}
-          >
-            <MenuItem value={'laptop'}>Add Laptop</MenuItem>
-            <MenuItem value={'other'}>Add Other</MenuItem>
-          </Select>
-
+            <Select
+              className={classes.root}
+              value={itemToAdd}
+              onChange={handleChange}
+              //input={<OutlinedInput name="addItem" id="add-item" />}
+            >
+              <MenuItem value={'laptop'}>Add Laptop</MenuItem>
+              <MenuItem value={'other'}>Add Other</MenuItem>
+            </Select>
             {renderForm()}
           </FormControl>
           </DialogContent>

@@ -6,15 +6,17 @@ import LaptopModels from '../static/laptop-models';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-    marginRight: theme.spacing(1),
-    marginLeft: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+    display: 'flex',
+    flexWrap: 'wrap',
   },
-  label: {
+  formControl: {
     flexGrow: 1,
-    marginLeft: theme.spacing(2),
+    margin: theme.spacing(1),
+    minWidth: 160,
   },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  }
 }));
 
 export default function AddLaptopForm(props) {
@@ -31,10 +33,20 @@ export default function AddLaptopForm(props) {
       laptopInfo.year = year;
       laptopInfo.available = true
       console.log(laptopInfo);
-      // axios.post('http://localhost:4000/laptops/add' , laptopInfo)
-      // .then(res => console.log(res.data));
+      axios.post('http://localhost:4000/laptops/add' , laptopInfo)
+      .then(res => window.location.reload());
   }
-
+  const inputLabel = React.useRef(null);
+  const [labelWidth, setLabelWidth] = React.useState(0);
+  useEffect(() => {
+    setLabelWidth(inputLabel.current.offsetWidth*1.5);
+  }, []);
+  //Update when add laptop is true;
+  useEffect(() => {
+    if(props.addLaptop){
+      addLaptop();
+    }
+  }, [props.addLaptop]);
   const handleBrandChange = (e) => {
     setBrand(e.target.value);
   }
@@ -62,45 +74,42 @@ export default function AddLaptopForm(props) {
     return years;
   }
 
-  useEffect(() => {
-    console.log('In effect');
-  }, []);
-
   return (
-    <div>
-      {props.addLaptop}
-      <FormControl name = "laptopForm">
-        {/* <InputLabel className={classes.label} htmlFor="outlined-brand-simple">Brand</InputLabel> */}
+    <form className={classes.root}>
+      <FormControl variant="outlined" className={classes.formControl} name = "brand">
+        <InputLabel ref={inputLabel} htmlFor="outlined-brand-simple">
+          Brand
+        </InputLabel>
         <Select
-          className={classes.root}
           value={brand}
           onChange={handleBrandChange}
-          input={<OutlinedInput name="brand" id="outlined-brand-simple" />}
+          input={<OutlinedInput labelWidth={labelWidth} name="brand" id="outlined-brand-simple" />}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
           <MenuItem value={'Apple'}>Apple</MenuItem>
           <MenuItem value={'Dell'}>Dell</MenuItem>
           <MenuItem value={'Google'}>Google</MenuItem>
         </Select>
-        {/* <InputLabel className={classes.label} htmlFor="outlined-model-simple">Model</InputLabel> */}
+        </FormControl>
+      <FormControl variant="outlined" className={classes.formControl} name = "model">
+        <InputLabel ref={inputLabel} htmlFor="outlined-model-simple">
+          Model
+        </InputLabel>
         <Select
-          className={classes.root}
           value={model}
           onChange={handleModelChange}
-          input={<OutlinedInput name="model" id="outlined-model-simple" />}
+          input={<OutlinedInput labelWidth={labelWidth} name="model" id="outlined-model-simple" />}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
           {renderLaptopModels()}
         </Select>
+        </FormControl>
+        <FormControl variant="outlined" className={classes.formControl} name = "year">
+        <InputLabel ref={inputLabel} htmlFor="outlined-year-simple">
+          Year
+        </InputLabel>
         <Select
-          className={classes.root}
           value={year}
           onChange={handleYearChange}
-          input={<OutlinedInput name="year" id="outlined-year-simple" />}
+          input={<OutlinedInput labelWidth={labelWidth} name="year" id="outlined-year-simple" />}
         >
           <MenuItem value="">
             <em>None</em>
@@ -108,6 +117,6 @@ export default function AddLaptopForm(props) {
           {renderLaptopYears()}
         </Select>
       </FormControl>
-    </div>
+    </form>
   );
 }
