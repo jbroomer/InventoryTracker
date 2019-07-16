@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FormControl, FormLabel, Select, OutlinedInput, MenuItem, TextField, InputLabel} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import LaptopModels from '../static/laptop-models';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,18 +44,33 @@ export default function AddLaptopForm(props) {
   const handleYearChange = (e) => {
     setYear(e.target.value);
   }
+  const renderLaptopModels = () => {
+    if(!brand) {
+      return null;
+    }
+    const menuItems = LaptopModels[brand].map((model) => {
+      return (<MenuItem key={model} value={model}>{model}</MenuItem>);
+    });
+    return menuItems;
+  }
+  const renderLaptopYears = () => {
+    const currYear = (new Date()).getFullYear();
+    const years = [];
+    for(let i = 2010; i<=currYear; ++i) {
+      years.push(<MenuItem key={i} value={i}>{i}</MenuItem>);
+    }
+    return years;
+  }
 
   useEffect(() => {
-    if(props.addLaptop){
-      addLaptop();
-    }
-  }, [props.addLaptop]);
+    console.log('In effect');
+  }, []);
 
   return (
     <div>
       {props.addLaptop}
       <FormControl name = "laptopForm">
-        <InputLabel className={classes.label} htmlFor="outlined-brand-simple">Brand</InputLabel>
+        {/* <InputLabel className={classes.label} htmlFor="outlined-brand-simple">Brand</InputLabel> */}
         <Select
           className={classes.root}
           value={brand}
@@ -68,24 +84,29 @@ export default function AddLaptopForm(props) {
           <MenuItem value={'Dell'}>Dell</MenuItem>
           <MenuItem value={'Google'}>Google</MenuItem>
         </Select>
-          <TextField
-              required
-              id="outlined-simple-start-adornment"
-              className={classes.root}
-              variant="outlined"
-              label="Model"
-              name = "model"
-              onChange={handleModelChange}
-            />
-          <TextField
-              required
-              id="outlined-simple-start-adornment"
-              className={classes.root}
-              variant="outlined"
-              label="Year"
-              name = "year"
-              onChange={handleYearChange}
-            />
+        {/* <InputLabel className={classes.label} htmlFor="outlined-model-simple">Model</InputLabel> */}
+        <Select
+          className={classes.root}
+          value={model}
+          onChange={handleModelChange}
+          input={<OutlinedInput name="model" id="outlined-model-simple" />}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          {renderLaptopModels()}
+        </Select>
+        <Select
+          className={classes.root}
+          value={year}
+          onChange={handleYearChange}
+          input={<OutlinedInput name="year" id="outlined-year-simple" />}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          {renderLaptopYears()}
+        </Select>
       </FormControl>
     </div>
   );

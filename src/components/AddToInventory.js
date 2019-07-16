@@ -5,6 +5,7 @@ import {
   DialogTitle,
   DialogActions,
   Select,
+  Divider,
   OutlinedInput,
   MenuItem,
   InputLabel,
@@ -73,6 +74,7 @@ const AddLaptop = (props) => {
           <DialogTitle style={{textAlign:'center'}}>
             Add to Inventory
           </DialogTitle>
+          <Divider />
           <DialogContent>
            <FormControl>
           <Select
