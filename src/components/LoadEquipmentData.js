@@ -8,7 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Checkbox from '@material-ui/core/Checkbox';
 import InputBase from '@material-ui/core/InputBase';
-import ReserveEquipment from './ReserveEquipment';
+import ReserveEquipment from './ReserveItem';
 import CheckedOutEquipment from './CheckedOutEquipment';
 import EquipmentCard from './EquipmentCard';
 
@@ -80,7 +80,7 @@ export default function CenteredGrid() {
             return <EquipmentCard 
             key = {x._id} 
             item = {x} 
-            showForm = {x.available ? (<ReserveEquipment key = {x._id} item = {x}/>) 
+            showForm = {x.available ? (<ReserveEquipment queryType='equipment' key = {x._id} item = {x}/>) 
                         : <CheckedOutEquipment key = {x._id} item = {x}/>}
                     />
           });

@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import { FormControl, TextField, InputBase } from '@material-ui/core';
+import { FormControl, TextField } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
