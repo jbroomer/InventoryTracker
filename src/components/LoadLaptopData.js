@@ -9,7 +9,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import Checkbox from '@material-ui/core/Checkbox';
 import InputBase from '@material-ui/core/InputBase';
 import ReserveLaptop from './ReserveItem';
-import CheckedOutLaptop from './CheckedOutLaptop';
+import CheckedOutLaptop from './CheckedOutItem';
 import LaptopCard from './LaptopCard';
 
 
@@ -81,7 +81,7 @@ export default function CenteredGrid() {
             key = {x._id}
             item = {x}
             showForm = {x.available ? (<ReserveLaptop queryType='laptops' key = {x._id} item = {x}/>)
-                        : <CheckedOutLaptop key = {x._id} item = {x}/>}
+                        : <CheckedOutLaptop queryType='laptops' itemType='laptop' key = {x._id} item = {x}/>}
                     />
           });
 
