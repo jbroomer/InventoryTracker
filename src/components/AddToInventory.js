@@ -28,6 +28,7 @@ const AddLaptop = (props) => {
   const [itemToAdd, setItemToAdd] = useState('laptop');
   const [addLaptop, setAddLaptop] = useState(false);
   const [addEquipment, setAddEquipment] = useState(false);
+  const [isEquipmentEmpty, setEquipmentEmpty] = useState(false);
 
   const handleAddItem = () => {
     if(itemToAdd === 'laptop') {
@@ -42,10 +43,19 @@ const AddLaptop = (props) => {
     setItemToAdd(e.target.value);
   }
   const handleClose = () => {
+    if(isEquipmentEmpty && itemToAdd!=='equipment' 
+        || !isEquipmentEmpty && itemToAdd==='equipment'){
+          setOpen(false);
+    }
+  }
+  const handleCancel = () => {
     setOpen(false);
   }
   const handleOnOpen = () => {
     setOpen(true);
+  }
+  const setAddEquipmentOk = (ok) => {
+    setEquipmentEmpty(ok);
   }
 
   const renderForm = () => {
@@ -54,7 +64,7 @@ const AddLaptop = (props) => {
     }
     return <AddEquipmentForm addEquipment={addEquipment} />;
   }
-  
+
   return(
     <div>
       <Button 
@@ -86,7 +96,7 @@ const AddLaptop = (props) => {
           <Button 
             variant="contained"
             color="secondary"
-            onClick={handleClose}
+            onClick={handleCancel}
           >
             Cancel
           </Button>

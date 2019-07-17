@@ -70,9 +70,8 @@ function NavBar(props) {
 const RoutedApp = () => (  
   
   <BrowserRouter>
-    <NavBar />
-    <Route path="/" component={LoadLaptopData} />
-    {/* <Route path = "/checkoutLaptops" component = {LoadLaptopData} /> */}
+    <Route path="/" component={NavBar} />
+    <Route path = "/checkoutLaptops" component = {LoadLaptopData} />
     <Route path="/checkoutEquipment" component={LoadEquipmentData} />
   </BrowserRouter>
   );
