@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CheckedOutLaptopInformation(props) {
+export default function CheckedOutInformation(props) {
   const classes = useStyles();
   return (
     <div>

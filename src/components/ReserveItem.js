@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
 import { Dialog} from '@material-ui/core';
-import ReserveLaptopForm from './ReserveItemForm'
+import ReserveItemForm from './ReserveItemForm'
 
 class ReserveLaptop extends Component {
   constructor(props) {
@@ -32,11 +32,11 @@ class ReserveLaptop extends Component {
     return (
       <div>
         <Dialog fullWidth open = {this.state.open} onBackdropClick = {this._handleCancel}>
-            <ReserveLaptopForm 
+            <ReserveItemForm 
             item = {this.props.item}
             onClose = {this._handleClose}
             onCancel = {this._handleCancel}
-            query = 'laptops'
+            query = {this.props.queryType}
             />
         </Dialog>
         <Button size="small" color="primary" onClick={this._handleOpen}>

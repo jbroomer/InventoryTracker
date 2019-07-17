@@ -1,43 +1,71 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import axios from 'axios';
+import { makeStyles } from '@material-ui/core/styles';
+import { FormControl, TextField } from '@material-ui/core';
 
-export default function AddEquipmentForm(props) {
-  let equipmentInfo = {
-      staffMemberName: '',
-      lendDate: '',
-      expectedReturnDate: '',
-      tssEmployeeName: ''
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    marginRight: theme.spacing(1),
+    marginLeft: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+}));
+
+const AddEquipmentForm = (props) => {
+  const [typeError, setTypeError]=useState(false);
+  const [idError, setIdError]=useState(false);
+  const classes = useStyles();
+  const addEquipment = () => {
+      let form = document.forms.equipmentForm;
+      const equipmentInfo = {};
+      equipmentInfo.type = form.type.value;
+      equipmentInfo.id = form.id.value;
+      equipmentInfo.available = true;
+      
+      if(!equipmentInfo.type){
+        setTypeError(true);
+      }
+      if(!equipmentInfo.id){
+        setIdError(true);
+      }
+      if(equipmentInfo.type && equipmentInfo.id){
+      axios.post('http://localhost:4000/equipment/add' , equipmentInfo)
+      .then(res => window.location.reload());
+      }
   }
-  
-    const addEquipment = () => {
-        let form = document.forms.equipmentForm;
 
-        equipmentInfo.type = form.type.value;
-        equipmentInfo.id = form.id.value
-        equipmentInfo.available = true
-
-        axios.post('http://localhost:4000/equipment/add' , equipmentInfo)
-        .then(res => console.log(res.data));
+  useEffect(() => {
+    if(props.addEquipment){
+      addEquipment();
     }
-    
+  }, [props.addEquipment]);
 
   return (
     <div>
-      <form onSubmit={() => {
-        addEquipment();
-        this.props.onClose();
-      }} name = "equipmentForm">
-        <label>
-            Type:
-            <input type="text" name="type"/>
-        </label><br/>
-        <label>
-            Id:
-            <input type="number" name="id" step="1" />
-        </label><br/>         
-
-            <input type="submit" value="Submit" />
+      <form name="equipmentForm">
+      <FormControl name = "equipmentForm">
+          <TextField
+              required
+              error={typeError}
+              id="outlined-simple-start-adornment"
+              className={classes.root}
+              variant="outlined"
+              label="Type"
+              name = "type"
+            />
+          <TextField
+              required
+              error={idError}
+              id="outlined-simple-start-adornment"
+              className={classes.root}
+              variant="outlined"
+              label="Id"
+              name = "id"
+            />
+      </FormControl>
       </form>
     </div>
   );
 }
+export default AddEquipmentForm;

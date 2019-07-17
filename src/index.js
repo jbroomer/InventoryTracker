@@ -2,17 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import  { Redirect, Route, Link, BrowserRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import LoadLaptopData from './components/LoadLaptopData';
 import LoadEquipmentData from './components/LoadEquipmentData';
-import AddLaptop from './components/AddLaptop';
-import AddEquipment from './components/AddEquipment';
+import AddItems from './components/AddToInventory';
+
 
 //import Dashboard from './components/Dashboard';
 
@@ -44,33 +41,25 @@ const useStyles = makeStyles(theme => ({
   },
   navbar: {
     ...theme.typography.button,
-    //backgroundColor: theme.palette.background.paper,
+    flexGrow: 1,
     padding: theme.spacing(1),
   },
 }));
 
 function NavBar(props) {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
-            </IconButton>
+          </IconButton>
             <Typography className = {classes.navbar} >
-            <Link style = {{ textDecoration: 'none', color: 'white' }} to = '/checkoutLaptops'>Checkout Laptops</Link>
-            </Typography>
-            <Typography className = {classes.navbar}>
-            <Link style = {{ textDecoration: 'none', marginLeft: '10px', color: 'white'}} to = '/checkoutEquipment'>Checkout Equipment</Link>
-            </Typography>
-            <Typography className = {classes.navbar}>
-            <Link style = {{ textDecoration: 'none', marginLeft: '10px', color: 'white'}} to = '/addLaptops'>Add Laptops</Link>
-            </Typography>
-            <Typography className = {classes.navbar}>
-            <Link style = {{ textDecoration: 'none', marginLeft: '10px', color: 'white'}} to = '/addEquipment'>Add Equipment</Link>
-            </Typography>
+              <Link style = {{ textDecoration: 'none', color: 'white' }} to = '/checkoutLaptops'>Checkout Laptops</Link>
+              <Link style = {{ textDecoration: 'none', marginLeft: '10px', color: 'white'}} to = '/checkoutEquipment'>Checkout Equipment</Link>            
+            </Typography>   
+            <AddItems />        
         </Toolbar>
       </AppBar>
       {props.children}
@@ -78,29 +67,12 @@ function NavBar(props) {
   );
 }
 
-// const TestApp = (props) => (
-//   <div>
-//     <Navbar buttonLink = { <Link to = '/checkout'>Checkout</Link>}/>
-//     <div className="contents">
-//       {props.children}
-//     </div>
-//   </div >
-// );
-
-// For safety, we specify that the prop types received by the
-// App component must require a "children" property. If we do
-// not include this it will not compile.
-// TestApp.propTypes = {
-//   children: React.PropTypes.object.isRequired,
-// };
-const RoutedApp = () => (
-  <BrowserRouter >
+const RoutedApp = () => (  
+  
+  <BrowserRouter>
     <Route path="/" component={NavBar} />
-    <Redirect exact from="/" to="/checkoutLaptops" />
     <Route path = "/checkoutLaptops" component = {LoadLaptopData} />
     <Route path="/checkoutEquipment" component={LoadEquipmentData} />
-    <Route path = "/addLaptops" component = {AddLaptop} />
-    <Route path = "/addEquipment" component = {AddEquipment} />
   </BrowserRouter>
   );
 
