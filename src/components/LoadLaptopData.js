@@ -12,7 +12,6 @@ import ReserveLaptop from './ReserveItem';
 import CheckedOutLaptop from './CheckedOutItem';
 import LaptopCard from './LaptopCard';
 
-
 const BootstrapInput = withStyles(theme => ({
   root: {
     'label + &': {
@@ -118,11 +117,9 @@ export default function CenteredGrid() {
     setCheckbox(!checkBoxState);
   }
 
-
   useEffect(() => {
     loadData();
   }, [checkBoxState, filter]);
-
 
   return (
     <div className={classes.root}>

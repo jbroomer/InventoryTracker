@@ -11,7 +11,6 @@ import chromebook from '../assets/chromebook.jpeg';
 import dell from '../assets/dell.jpeg';
 import apple from '../assets/macbook.jpeg';
 
-
 const useStyles = makeStyles({
   card: {
     maxWidth: 345,

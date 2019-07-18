@@ -12,7 +12,6 @@ import ReserveEquipment from './ReserveItem';
 import CheckedOutEquipment from './CheckedOutItem';
 import EquipmentCard from './EquipmentCard';
 
-
 const BootstrapInput = withStyles(theme => ({
   root: {
     'label + &': {
@@ -118,12 +117,10 @@ export default function CenteredGrid() {
     setCheckbox(!checkBoxState);
   }
 
-
   useEffect(() => {
     loadData();
   }, [checkBoxState, filter]);
   
-
   return (
     <div className={classes.root}>
       <FormControl fullWidth >

@@ -4,14 +4,12 @@ import CheckedOutInformation from './CheckedOutInformation';
 import { Dialog, DialogTitle, DialogActions, DialogContent } from '@material-ui/core'
 import axios from 'axios';
 
-
 class CheckedOutLaptop extends Component {
   constructor(props) {
 		super();
 		this.state = {
 			open: false
 		};
-    //this.toggleLaptopInformation = this.toggleLaptopInformation.bind(this);
     this.returnItem = this.returnItem.bind(this);
     this._handleClick = this._handleClick.bind(this);
     this._handleClose = this._handleClose.bind(this);
@@ -25,16 +23,12 @@ class CheckedOutLaptop extends Component {
   _handleClose() {
     this.setState({ open: false });
   }
-  // toggleLaptopInformation() {
-  //   this.setState({ clicked:  })
-  // }
 
   returnItem(){
     axios.post(`http://localhost:4000/${this.props.queryType}/return/` + this.props.item._id)
     .then(window.location.reload());
     console.log("here");
   }
-
 
   render(){
     return(
@@ -60,7 +54,4 @@ class CheckedOutLaptop extends Component {
     )
   }
 }
-
-
-
 export default CheckedOutLaptop;

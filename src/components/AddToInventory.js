@@ -43,8 +43,8 @@ const AddLaptop = (props) => {
     setItemToAdd(e.target.value);
   }
   const handleClose = () => {
-    if(isEquipmentEmpty && itemToAdd!=='equipment' 
-        || !isEquipmentEmpty && itemToAdd==='equipment'){
+    if((isEquipmentEmpty && itemToAdd!=='equipment') 
+        || (!isEquipmentEmpty && itemToAdd==='equipment')){
           setOpen(false);
     }
   }
@@ -62,7 +62,7 @@ const AddLaptop = (props) => {
     if(itemToAdd === 'laptop'){
       return <AddLaptopForm addLaptop={addLaptop} />;
     }
-    return <AddEquipmentForm addEquipment={addEquipment} />;
+    return <AddEquipmentForm emptyError={setAddEquipmentOk} addEquipment={addEquipment} />;
   }
 
   return(
@@ -84,7 +84,6 @@ const AddLaptop = (props) => {
             className={classes.root}
             value={itemToAdd}
             onChange={handleChange}
-            //input={<OutlinedInput name="addItem" id="add-item" />}
           >
             <MenuItem value={'laptop'}>Add Laptop</MenuItem>
             <MenuItem value={'other'}>Add Other</MenuItem>

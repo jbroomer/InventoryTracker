@@ -10,18 +10,10 @@ import LoadLaptopData from './components/LoadLaptopData';
 import LoadEquipmentData from './components/LoadEquipmentData';
 import AddItems from './components/AddToInventory';
 
-
-//import Dashboard from './components/Dashboard';
-
-
-//ReactDOM.render(<App />, document.getElementById('root'));
-
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-
-
 
 var contentNode = document.getElementById("root");
 

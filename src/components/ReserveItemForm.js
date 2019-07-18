@@ -20,22 +20,22 @@ export default function ReserveLaptopForm(props) {
       tssEmployeeName: '',
   }
     const reserveLaptop = () => {
-        let form = document.forms.laptopForm;
-        reservationInfo.staffMemberName = form.staffMemberName.value;
-        reservationInfo.tssEmployeeName = form.tssEmployeeName.value;
+      let form = document.forms.laptopForm;
+      reservationInfo.staffMemberName = form.staffMemberName.value;
+      reservationInfo.tssEmployeeName = form.tssEmployeeName.value;
 
-        reservationInfo.lendDate = form.lendDate.value + `, ${lendDate.getYear() + 1900}`;
-        reservationInfo.expectedReturnDate = form.expectedReturn.value + `, ${returnDate.getYear() + 1900}`;
+      reservationInfo.lendDate = form.lendDate.value + `, ${lendDate.getYear() + 1900}`;
+      reservationInfo.expectedReturnDate = form.expectedReturn.value + `, ${returnDate.getYear() + 1900}`;
 
-        const staffError = reservationInfo.staffMemberName.length >= 1 ? false : true;
-        const tssError = reservationInfo.tssEmployeeName.length >= 1 ? false : true;
-        setStaffEmptyError(staffError);
-        setTssEmptyError(tssError);
-        
-        if(!staffError && !tssError) {
-          axios.post(`http://localhost:4000/${props.query}/update/` + props.item._id, reservationInfo)
-          .then(res => props.onClose());
-        }
+      const staffError = reservationInfo.staffMemberName.length >= 1 ? false : true;
+      const tssError = reservationInfo.tssEmployeeName.length >= 1 ? false : true;
+      setStaffEmptyError(staffError);
+      setTssEmptyError(tssError);
+      
+      if(!staffError && !tssError) {
+        axios.post(`http://localhost:4000/${props.query}/update/` + props.item._id, reservationInfo)
+        .then(res => props.onClose());
+      }
     }
 
     const _handleLendDateChange = (date) => {
@@ -48,16 +48,15 @@ export default function ReserveLaptopForm(props) {
       else{
         window.alert('The lend date cannot be later than the return date');
       }
-
     }
+
     const _handleReturnDateChange = (date) => {
       if(date.getYear() >= lendDate.getYear()
         && date.getMonth() >= lendDate.getMonth()
         && date.getDate() >= lendDate.getDate()
       ){
         setReturnDate(date);
-      }
-      else{
+      }else{
         window.alert('The return date cannot be earlier than the lend date');
       }
     }

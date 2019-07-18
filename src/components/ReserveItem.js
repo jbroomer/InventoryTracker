@@ -27,7 +27,6 @@ class ReserveLaptop extends Component {
     this.setState({ open: false})
   }
 
-
   render() {
     return (
       <div>
@@ -46,7 +45,5 @@ class ReserveLaptop extends Component {
     )
   }
 }
-
-
 
 export default ReserveLaptop;
