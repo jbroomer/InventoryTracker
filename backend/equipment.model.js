@@ -12,8 +12,8 @@ let equipment = new Schema({
     },
     lendInfo: {
        staffMemberName: {type:String},
-       lendDate: {type: String},
-       expectedReturnDate: {type: String},
+       lendDate: {type: Object},
+       expectedReturnDate: {type: Object},
        tssEmployeeName: {type: String}
     }
     

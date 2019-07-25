@@ -24,8 +24,14 @@ export default function ReserveLaptopForm(props) {
       reservationInfo.staffMemberName = form.staffMemberName.value;
       reservationInfo.tssEmployeeName = form.tssEmployeeName.value;
 
-      reservationInfo.lendDate = form.lendDate.value + `, ${lendDate.getYear() + 1900}`;
-      reservationInfo.expectedReturnDate = form.expectedReturn.value + `, ${returnDate.getYear() + 1900}`;
+      reservationInfo.lendDate = {
+        displayDate: form.lendDate.value + `, ${lendDate.getFullYear()}`,
+        fullDate: lendDate,
+      };
+      reservationInfo.expectedReturnDate = {
+        displayDate: form.expectedReturn.value + `, ${returnDate.getFullYear()}`,
+        fullDate: returnDate,
+      };
 
       const staffError = reservationInfo.staffMemberName.length >= 1 ? false : true;
       const tssError = reservationInfo.tssEmployeeName.length >= 1 ? false : true;
@@ -39,10 +45,7 @@ export default function ReserveLaptopForm(props) {
     }
 
     const _handleLendDateChange = (date) => {
-      if(date.getYear() <= returnDate.getYear()
-        && date.getMonth() <= returnDate.getMonth()
-        && date.getDate() <= returnDate.getDate()
-      ){
+      if((date-returnDate) < (3600*1000)){
         setLendDate(date);
       }
       else{
@@ -51,10 +54,7 @@ export default function ReserveLaptopForm(props) {
     }
 
     const _handleReturnDateChange = (date) => {
-      if(date.getYear() >= lendDate.getYear()
-        && date.getMonth() >= lendDate.getMonth()
-        && date.getDate() >= lendDate.getDate()
-      ){
+      if((date-lendDate) > (-3600*1000)){
         setReturnDate(date);
       }else{
         window.alert('The return date cannot be earlier than the lend date');

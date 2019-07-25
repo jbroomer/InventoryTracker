@@ -11,16 +11,17 @@ const useStyles = makeStyles(theme => ({
 
 export default function CheckedOutInformation(props) {
   const classes = useStyles();
+
   return (
     <div>
         <Typography variant = "h6">Staff Member:</Typography>
         <Typography variant = "body1">{props.item.lendInfo.staffMemberName}</Typography>
         <Divider className = {classes.divider}/>
         <Typography variant = "h6">Lend Date:</Typography>
-        <Typography variant = "body1">{props.item.lendInfo.lendDate}</Typography>
+        <Typography variant = "body1">{props.item.lendInfo.lendDate.displayDate}</Typography>
         <Divider className = {classes.divider}/>
         <Typography variant = "h6">Expected Return:</Typography>
-        <Typography variant = "body1">{props.item.lendInfo.expectedReturnDate}</Typography>
+        <Typography variant = "body1">{props.item.lendInfo.expectedReturnDate.displayDate}</Typography>
         <Divider className = {classes.divider}/>
         <Typography variant = "h6">TSS Employee Name:</Typography>
         <Typography variant = "body1">{props.item.lendInfo.tssEmployeeName}</Typography>

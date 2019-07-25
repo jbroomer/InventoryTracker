@@ -13,8 +13,8 @@ class CheckedOutLaptop extends Component {
     this.returnItem = this.returnItem.bind(this);
     this._handleClick = this._handleClick.bind(this);
     this._handleClose = this._handleClose.bind(this);
+    this.checkOverdue = this.checkOverdue.bind(this);
   }
-
 
   _handleClick() {
     this.setState({ open: true });
@@ -27,7 +27,18 @@ class CheckedOutLaptop extends Component {
   returnItem(){
     axios.post(`http://localhost:4000/${this.props.queryType}/return/` + this.props.item._id)
     .then(window.location.reload());
-    console.log("here");
+  }
+
+  checkOverdue = () => {
+    const fullDate = new Date(this.props.item.lendInfo.expectedReturnDate.fullDate);
+    const currDate = new Date();
+
+    if((currDate - fullDate) > 0 && (currDate - fullDate) < (86400*1000)) {
+      return 'Checked Out (Due Today)' 
+    } else if((currDate - fullDate) > (48200*1000)) {
+      return 'Checked Out (OVERDUE)' 
+    }
+    return 'Checked Out';
   }
 
   render(){
@@ -48,7 +59,7 @@ class CheckedOutLaptop extends Component {
           </DialogActions>
         </Dialog>
         <Button size="small" color = "secondary" onClick={this._handleClick}>
-          Checked Out
+          {this.checkOverdue()}
         </Button>
       </div>
     )

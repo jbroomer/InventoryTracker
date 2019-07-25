@@ -73,7 +73,7 @@ const AddLaptop = (props) => {
       >
         Add
       </Button>
-      <Dialog open={open} onBackdropClick={handleClose}>
+      <Dialog open={open} onBackdropClick={handleCancel}>
         <DialogTitle style={{textAlign:'center'}}>
           Add to Inventory
         </DialogTitle>
@@ -92,19 +92,19 @@ const AddLaptop = (props) => {
         </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button 
-            variant="contained"
-            color="secondary"
-            onClick={handleCancel}
-          >
-            Cancel
-          </Button>
           <Button
             variant="contained"
             color="primary"
             onClick={handleAddItem}
           >
             Add
+          </Button>
+          <Button 
+            variant="contained"
+            color="secondary"
+            onClick={handleCancel}
+          >
+            Cancel
           </Button>
         </DialogActions>
       </Dialog>
