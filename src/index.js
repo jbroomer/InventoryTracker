@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     marginBottom: '20px',
+    background: '#881c1c',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -42,7 +43,7 @@ function NavBar(props) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar className={classes.root} position="static">
         <Toolbar>
           <Typography className = {classes.navbar} >
             <Link style = {{ textDecoration: 'none', color: 'white' }} to = '/checkoutLaptops'>Checkout Laptops</Link>
