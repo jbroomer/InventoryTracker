@@ -1,7 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import { Dialog} from '@material-ui/core';
 import ReserveItemForm from './ReserveItemForm'
+
+const propTypes = {
+  item: PropTypes.object.isRequired,
+  queryType: PropTypes.string.isRequired,
+};
 
 class ReserveLaptop extends Component {
   constructor(props) {
@@ -45,5 +51,5 @@ class ReserveLaptop extends Component {
     )
   }
 }
-
+ReserveLaptop.propTypes = propTypes;
 export default ReserveLaptop;

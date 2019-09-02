@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CenteredGrid() {
+export default function LoadLaptopData() {
   const classes = useStyles();
   const [cards, setCards] = useState([]);
   const [filter, setFilter] = useState('All');

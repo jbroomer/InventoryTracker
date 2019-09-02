@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useState } from 'react'
 import { Button, TextField, DialogActions, DialogContent, DialogTitle} from '@material-ui/core';
@@ -8,7 +9,14 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-export default function ReserveLaptopForm(props) {
+const propTypes = {
+  query: PropTypes.string.isRequired,
+  item: PropTypes.object.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+};
+
+export default function ReserveItemForm(props) {
   const [lendDate, setLendDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(new Date());
   const [staffEmptyError, setStaffEmptyError] = useState(false);
@@ -137,3 +145,4 @@ export default function ReserveLaptopForm(props) {
     </div>
   );
 }
+ReserveItemForm.propTypes = propTypes;

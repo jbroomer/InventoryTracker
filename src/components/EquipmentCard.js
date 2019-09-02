@@ -1,5 +1,6 @@
-import Grid from '@material-ui/core/Grid';
 import React from 'react';
+import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -11,6 +12,10 @@ import mouse from '../assets/mouse.jpeg';
 import keyboard from '../assets/keyboard.jpeg';
 import microphone from '../assets/microphone.jpeg';
 
+const propTypes = {
+  item: PropTypes.object.isRequired,
+  showForm: PropTypes.object.isRequired,
+};
 
 const useStyles = makeStyles({
   card: {
@@ -25,7 +30,9 @@ const equipmentImages = {
   Mouse: mouse, Keyboard: keyboard, Microphone: microphone,
 }
 
-export default function MediaCard(props) {
+export default function EquipmentCard({
+  item, showForm,
+}) {
   const classes = useStyles();
 
   const cardImgUrl = (type) => {
@@ -43,24 +50,25 @@ export default function MediaCard(props) {
 
   return (
     <Grid item xs={3}>
-      <Card id = {props.item.id} className={classes.card}>
+      <Card id = {item.id} className={classes.card}>
         <CardActionArea>
-            <CardMedia
+          <CardMedia
             className={classes.media}
             component = 'img'
             alt = 'EquipmentImg'
-            image = {cardImgUrl(props.item.type)}
-            />
-            <CardContent>
+            image = {cardImgUrl(item.type)}
+          />
+          <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-                {props.item.type} ({props.item.id})
+                {item.type} ({item.id})
             </Typography>
-            </CardContent>
+          </CardContent>
         </CardActionArea>
         <CardActions>
-            {props.showForm}
+            {showForm}
         </CardActions>
       </Card>
     </Grid>
   );
 }
+EquipmentCard.propTypes = propTypes;

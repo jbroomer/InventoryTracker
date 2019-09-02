@@ -1,7 +1,12 @@
 import React, {useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormControl, TextField } from '@material-ui/core';
+
+const propTypes = {
+  addEquipment: PropTypes.bool.isRequired,
+};
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -68,4 +73,5 @@ const AddEquipmentForm = (props) => {
     </div>
   );
 }
+AddEquipmentForm.propTypes = propTypes;
 export default AddEquipmentForm;

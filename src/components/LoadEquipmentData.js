@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -11,6 +12,10 @@ import InputBase from '@material-ui/core/InputBase';
 import ReserveEquipment from './ReserveItem';
 import CheckedOutEquipment from './CheckedOutItem';
 import EquipmentCard from './EquipmentCard';
+
+const propTypes = {
+  item: PropTypes.object.isRequired,
+};
 
 const BootstrapInput = withStyles(theme => ({
   root: {
@@ -57,7 +62,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CenteredGrid() {
+export default function LoadEquipmentData() {
   const classes = useStyles();
   const [cards, setCards] = useState([]);
   const [filter, setFilter] = useState('All');
@@ -154,3 +159,4 @@ export default function CenteredGrid() {
     </div>
   );
 }
+LoadEquipmentData.propTypes = propTypes;

@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { FormControl, Select, OutlinedInput, MenuItem, InputLabel} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import LaptopModels from '../static/laptop-models';
+
+const propTypes = {
+  addLaptop: PropTypes.bool.isRequired,
+};
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,12 +24,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+/**
+ * Add a new laptop to the database using a dropdown menu
+ */
 export default function AddLaptopForm(props) {
   const classes = useStyles();
   const [brand, setBrand] = useState('');
   const [model, setModel] = useState('');
   const [year, setYear] = useState('');
   
+  // Adds the laptop to the database if all of the fields are filled in
   const addLaptop = () => {
       const laptopInfo = {};
       if(brand && model && year) {
@@ -42,12 +51,14 @@ export default function AddLaptopForm(props) {
   useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth*1.5);
   }, []);
+  
   //Update when add laptop is true;
   useEffect(() => {
     if(props.addLaptop){
       addLaptop();
     }
   }, [props.addLaptop]);
+
   const handleBrandChange = (e) => {
     setBrand(e.target.value);
   }
@@ -57,6 +68,7 @@ export default function AddLaptopForm(props) {
   const handleYearChange = (e) => {
     setYear(e.target.value);
   }
+  // Dynamically fill in the dropdowns based on previous selections
   const renderLaptopModels = () => {
     if(!brand) {
       return null;
@@ -66,6 +78,7 @@ export default function AddLaptopForm(props) {
     });
     return menuItems;
   }
+  // Dynamically fill in the dropdowns based on previous selections
   const renderLaptopYears = () => {
     const currYear = (new Date()).getFullYear();
     const years = [];
@@ -121,3 +134,4 @@ export default function AddLaptopForm(props) {
     </form>
   );
 }
+AddLaptopForm.propTypes = propTypes;

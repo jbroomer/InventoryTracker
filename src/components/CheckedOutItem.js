@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import CheckedOutInformation from './CheckedOutInformation';
 import { Dialog, DialogTitle, DialogActions, DialogContent } from '@material-ui/core'
 import axios from 'axios';
 
-class CheckedOutLaptop extends Component {
+const propTypes = {
+  queryType: PropTypes.string.isRequired,
+  item: PropTypes.object.isRequired,
+  itemType: PropTypes.string,
+};
+
+class CheckedOutItem extends Component {
   constructor(props) {
 		super();
 		this.state = {
@@ -65,4 +72,5 @@ class CheckedOutLaptop extends Component {
     )
   }
 }
-export default CheckedOutLaptop;
+CheckedOutItem.propTypes = propTypes;
+export default CheckedOutItem;

@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const AddLaptop = (props) => {
+const AddLaptop = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [itemToAdd, setItemToAdd] = useState('laptop');
