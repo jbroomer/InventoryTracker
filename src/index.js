@@ -44,14 +44,11 @@ function NavBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
-            <Typography className = {classes.navbar} >
-              <Link style = {{ textDecoration: 'none', color: 'white' }} to = '/checkoutLaptops'>Checkout Laptops</Link>
-              <Link style = {{ textDecoration: 'none', marginLeft: '10px', color: 'white'}} to = '/checkoutEquipment'>Checkout Equipment</Link>            
-            </Typography>   
-            <AddItems />        
+          <Typography className = {classes.navbar} >
+            <Link style = {{ textDecoration: 'none', color: 'white' }} to = '/checkoutLaptops'>Checkout Laptops</Link>
+            <Link style = {{ textDecoration: 'none', marginLeft: '10px', color: 'white'}} to = '/checkoutEquipment'>Checkout Equipment</Link>            
+          </Typography>   
+          <AddItems />        
         </Toolbar>
       </AppBar>
       {props.children}
