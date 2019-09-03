@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import  { Route, Link, BrowserRouter } from 'react-router-dom';
+import { Route, Link, BrowserRouter, Switch } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -45,11 +45,11 @@ function NavBar(props) {
     <div className={classes.root}>
       <AppBar className={classes.root} position="static">
         <Toolbar>
-          <Typography className = {classes.navbar} >
-            <Link style = {{ textDecoration: 'none', color: 'white' }} to = '/checkoutLaptops'>Checkout Laptops</Link>
-            <Link style = {{ textDecoration: 'none', marginLeft: '10px', color: 'white'}} to = '/checkoutEquipment'>Checkout Equipment</Link>            
-          </Typography>   
-          <AddItems />        
+          <Typography className={classes.navbar} >
+            <Link style={{ textDecoration: 'none', color: 'white' }} to='/checkoutLaptops'>Checkout Laptops</Link>
+            <Link style={{ textDecoration: 'none', marginLeft: '10px', color: 'white' }} to='/checkoutEquipment'>Checkout Equipment</Link>
+          </Typography>
+          <AddItems />
         </Toolbar>
       </AppBar>
       {props.children}
@@ -57,13 +57,18 @@ function NavBar(props) {
   );
 }
 
-const RoutedApp = () => (  
-  
+const RoutedApp = () => (
+
   <BrowserRouter>
-    <Route path="/" component={NavBar} />
-    <Route path = "/checkoutLaptops" component = {LoadLaptopData} />
-    <Route path="/checkoutEquipment" component={LoadEquipmentData} />
+    <NavBar />
+    <Switch>
+      <Route exact path="/" component={LoadLaptopData} />
+      <Route exact path="/checkoutlaptops" component={LoadLaptopData} />
+      <Route path="/checkoutEquipment" component={LoadEquipmentData} />
+    </Switch >
   </BrowserRouter>
-  );
+);
 
 ReactDOM.render(<RoutedApp />, contentNode);
+
+//    <Route path="/checkoutLaptops" component={LoadLaptopData} />
