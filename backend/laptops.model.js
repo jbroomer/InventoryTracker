@@ -14,12 +14,19 @@ let laptops = new Schema({
         type: Boolean
     },
     lendInfo: {
-       staffMemberName: {type:String},
-       lendDate: {type: Object},
-       expectedReturnDate: {type: Object},
-       tssEmployeeName: {type: String}
-    }
-    
-}, {versionKey: false});
+        staffMemberName: { type: String },
+        lendDate: { type: Object },
+        expectedReturnDate: { type: Object },
+        tssEmployeeName: { type: String }
+    },
+    history: [{
+        staffMemberName: { type: String },
+        lendDate: { type: Object },
+        expectedReturnDate: { type: Object },
+        actualReturnDate: { type: Date },
+        tssEmployeeName: { type: String }
+    }]
+
+}, { versionKey: false });
 
 module.exports = mongoose.model('laptops', laptops);
